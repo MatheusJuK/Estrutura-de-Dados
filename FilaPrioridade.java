@@ -1,8 +1,8 @@
-public class Fila {
+public class FilaPrioridade {
     Node head, tail;
     int tamanho;
 
-    Fila() {
+    FilaPrioridade() {
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
@@ -20,8 +20,29 @@ public class Fila {
         tamanho++;
         return true;
     }
+    boolean enqueuePrioridade(int valor,int prioridade) {
+        Node novo = new Node(valor,prioridade);
+        if (tamanho == 0) {
+            this.head = novo;
+            this.tail = novo;
+        } else {
+            Node atual = this.head;
+            while(novo.prioridade >= atual.prioridade && atual.prox != null){
+                atual = atual.prox;
+            }
+            if(atual.prox == null){
+                atual.prox = novo;
+                this.tail = novo;
+            }else{
+                novo.prox = atual.prox;
+                atual.prox = novo;
+            }
+        }
+        tamanho++;
+        return true;
+    }
 
-    void imprimir(Fila fila) {
+    void imprimir(FilaPrioridade fila) {
         Node atual = fila.head;
         for (int i = fila.tamanho; i > 0; i--) {
             if (i == 1) {
@@ -65,25 +86,14 @@ public class Fila {
     }
 
     public static void main(String[] args) {
-        Fila fila1 = new Fila();
-        fila1.imprimir(fila1);
-        fila1.enqueue(5);
-        fila1.enqueue(10);
-        fila1.enqueue(15);
-        fila1.enqueue(20);
-        fila1.enqueue(25);
-        fila1.enqueue(30);
-        fila1.enqueue(35);
-        fila1.enqueue(40);
-        fila1.enqueue(45);
+        FilaPrioridade fila1 = new FilaPrioridade();
+        fila1.enqueue(1);
+        fila1.enqueue(3);
+        fila1.enqueuePrioridade(2,1);
+        fila1.enqueuePrioridade(4,2);
         fila1.imprimir(fila1);
         fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
         fila1.imprimir(fila1);
+        
     }
 }

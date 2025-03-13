@@ -8,21 +8,27 @@ public class Deque {
         this.tamanho = 0;
     }
 
-    boolean add(int valor, int lado) {
+    boolean enqueueLeft(int valor) {
         Node novo = new Node(valor);
         if (tamanho == 0) {
-            head = novo;
-            tail = novo;
-        } else {
-            if (lado == 0) {
-                Node antigo = head;
-                head = novo;
-                head.prox = antigo;
-            }else if (lado == 1) {
-                Node antigo = tail;
-                tail = novo;
-                antigo.prox = tail;
-            }
+            this.head = novo;
+            this.tail = novo;
+        }else{
+            novo.prox = this.head;
+            this.head = novo;
+        }
+        tamanho++;
+        return true;
+    }
+    boolean enqueueRight(int valor) {
+        Node novo = new Node(valor);
+        if (tamanho == 0) {
+            this.head = novo;
+            this.tail = novo;
+        }else{
+            tail.prox = novo;
+            this.tail = novo;
+            novo.ant = tail.ant;
         }
         tamanho++;
         return true;
