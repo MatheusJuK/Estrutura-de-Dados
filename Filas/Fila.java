@@ -21,12 +21,11 @@ public class Fila {
         return true;
     }
 
-    void imprimir(Fila fila) {
-        Node atual = fila.head;
-        for (int i = fila.tamanho; i > 0; i--) {
+    void imprimir() {
+        Node atual = this.head;
+        for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
-                atual = atual.prox;
             } else {
                 System.out.print(atual.valor + "->");
                 atual = atual.prox;
@@ -58,32 +57,15 @@ public class Fila {
         }
 
         tamanho--;
-        if(this.tail == null){
-            this.head = null;
-        }
         return elemento;
     }
 
     public static void main(String[] args) {
         Fila fila1 = new Fila();
-        fila1.imprimir(fila1);
         fila1.enqueue(5);
         fila1.enqueue(10);
-        fila1.enqueue(15);
-        fila1.enqueue(20);
-        fila1.enqueue(25);
-        fila1.enqueue(30);
-        fila1.enqueue(35);
-        fila1.enqueue(40);
-        fila1.enqueue(45);
-        fila1.imprimir(fila1);
+        fila1.imprimir();
         fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.imprimir(fila1);
+        fila1.imprimir();
     }
 }

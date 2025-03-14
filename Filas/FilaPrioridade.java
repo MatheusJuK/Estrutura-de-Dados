@@ -27,7 +27,7 @@ public class FilaPrioridade {
             this.tail = novo;
         } else {
             Node atual = this.head;
-            while(novo.prioridade >= atual.prioridade && atual.prox != null){
+            while(atual.prox != null && novo.prioridade > atual.prox.prioridade){
                 atual = atual.prox;
             }
             if(atual.prox == null){
@@ -42,9 +42,9 @@ public class FilaPrioridade {
         return true;
     }
 
-    void imprimir(FilaPrioridade fila) {
-        Node atual = fila.head;
-        for (int i = fila.tamanho; i > 0; i--) {
+    void imprimir() {
+        Node atual = this.head;
+        for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
                 atual = atual.prox;
@@ -87,13 +87,16 @@ public class FilaPrioridade {
 
     public static void main(String[] args) {
         FilaPrioridade fila1 = new FilaPrioridade();
+        fila1.enqueue(0);
         fila1.enqueue(1);
-        fila1.enqueue(3);
-        fila1.enqueuePrioridade(2,1);
-        fila1.enqueuePrioridade(4,2);
-        fila1.imprimir(fila1);
+        fila1.enqueue(2);
+        fila1.enqueuePrioridade(3,1);
+        fila1.enqueuePrioridade(4,1);
+        fila1.enqueuePrioridade(5,2);
+        fila1.imprimir();
         fila1.dequeue();
-        fila1.imprimir(fila1);
+        fila1.dequeue();
+        fila1.imprimir();
         
     }
 }
