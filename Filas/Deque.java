@@ -66,15 +66,15 @@ public class Deque {
     public static void main(String[] args) {
         Deque deque1 = new Deque();
         deque1.imprimir(deque1);
-        deque1.add(5,0);
-        deque1.add(10,0);
-        deque1.add(15,0);
-        deque1.add(20,0);
-        deque1.add(25,0);
-        deque1.add(30,0);
-        deque1.add(35,0);
-        deque1.add(40,0);
-        deque1.add(45,0);
+        deque1.enqueueLeft(5);
+        deque1.enqueueLeft(10);
+        deque1.enqueueLeft(15);
+        deque1.enqueueLeft(20);
+        deque1.enqueueLeft(25);
+        deque1.enqueueLeft(30);
+        deque1.enqueueLeft(35);
+        deque1.enqueueLeft(40);
+        deque1.enqueueLeft(45);
         deque1.imprimir(deque1);
         deque1.remover(0);
         deque1.remover(1);
