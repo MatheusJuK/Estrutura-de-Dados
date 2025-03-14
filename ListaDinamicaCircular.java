@@ -1,8 +1,8 @@
-public class ListaDinamica {
+public class ListaDinamicaCircular {
     Node head;
     int tamanho;
 
-    ListaDinamica(){
+    ListaDinamicaCircular(){
         this.head = null;
         this.tamanho = 0;
     }
@@ -13,10 +13,22 @@ public class ListaDinamica {
         }
         Node novo = new Node(valor);
         if (pos == 0) {
-            novo.prox = this.head;
-            this.head = novo;
-        }else{
-            Node atual = this.head;
+            if (tamanho == 0) {
+                this.head = novo;
+                novo.prox = head;
+            }
+            else{
+                Node atual = this.head;
+                while (atual.prox != this.head) {
+                    atual = atual.prox;
+                }
+                novo.prox = this.head;
+                this.head = novo;
+                atual.prox = this.head;
+            }
+        }
+        else{
+            Node atual = head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -27,13 +39,15 @@ public class ListaDinamica {
         return true;
     }
     public void imprimir() {
-        Node atual = this.head;
+        Node atual = head;
         System.out.print("head -> ");
-        while (atual != null) {
+
+        for(int i = 0; i < tamanho;i++){
             System.out.print(atual.valor + " -> ");
             atual = atual.prox;
         }
-        System.out.println("null");
+        System.out.println("head");
+
     }
 
     public Node remover(int pos) {
@@ -41,13 +55,19 @@ public class ListaDinamica {
             return null;
         }
         Node removido;
-        if (pos == 0) {
+        if (tamanho == 1) {
             removido = this.head;
-            this.head = removido.prox;
-            removido.prox = null;
-            tamanho--;
-            return removido;
-        } else {
+            this.head = null;
+        }else if(pos == 0){
+            Node atual = this.head;
+            while (atual.prox != this.head) {
+                atual = atual.prox;
+            }
+            removido = this.head;
+            this.head = head.prox;
+            atual.prox = this.head;
+            removido.prox = null; 
+        }else {
             Node atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
@@ -55,18 +75,15 @@ public class ListaDinamica {
             removido = atual.prox;
             atual.prox = removido.prox;
             removido.prox = null;
-            tamanho--;
-            return removido;
         }
+        tamanho--;
+        return removido;
     }
     public static void main(String[] args) {
-        ListaDinamica lista = new ListaDinamica();
+        ListaDinamicaCircular lista = new ListaDinamicaCircular();
         lista.add(0, 0);
-        lista.add(1, 1);
-        lista.add(2, 2);
-        lista.add(3, 0);
         lista.imprimir();
-        lista.remover(1);
+        lista.remover(0);
         lista.imprimir();
     }
 }

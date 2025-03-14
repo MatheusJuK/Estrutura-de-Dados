@@ -31,7 +31,7 @@ public class ListaEstatica {
     }
 
     void imprimir(){
-        for (int i = 0; i < ultimo; i++) {
+        for (int i = 0; i <= ultimo; i++) {
             System.out.print(valores[i] + " ");
         }
         System.out.println();
@@ -49,11 +49,6 @@ public class ListaEstatica {
         lista.add(8, 8);
         lista.add(9, 9);
         lista.imprimir();
-        lista.remove(0);
-        lista.remove(2);
-        lista.remove(4);
-        lista.remove(6);
-        lista.remove(8);
         lista.imprimir();
     }
 }

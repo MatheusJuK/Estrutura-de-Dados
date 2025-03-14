@@ -1,0 +1,113 @@
+public class ListaDuplamenteLigadaCircular {
+    Node head,tail;
+    int tamanho;
+
+    ListaDuplamenteLigadaCircular(){
+        this.head = null;
+        this.tail = null;
+        this.tamanho = 0;
+    }
+
+    boolean add(int valor, int pos){
+        if (pos < 0 || pos > tamanho) {
+            return false;
+        }
+        Node novo = new Node(valor);
+        if (tamanho == 0) {
+            this.head = novo;
+            this.tail = novo;
+            novo.prox = this.head;
+            novo.ant = this.tail;
+        }
+        else if(pos == 0){
+            novo.prox = this.head;
+            novo.ant = this.tail;
+            this.head.ant = novo;
+            this.tail.prox = novo;
+            this.head = novo;
+        }else if (pos == tamanho) {
+            novo.ant = this.tail;
+            this.tail.prox = novo;
+            this.tail = novo;
+            this.head.ant = this.tail;
+            this.tail.prox = this.head;
+        }else{
+            Node atual = this.head;
+            for (int i = 0; i < pos - 1; i++) {
+                atual = atual.prox;
+            }
+            novo.prox = atual.prox;
+            novo.ant = atual;
+            atual.prox.ant = novo;
+            atual.prox = novo;
+        }
+        tamanho++;
+        return true;
+    }
+    public void imprimir(){
+        Node atual = this.head;
+        Node atual2 = this.head;
+        System.out.print(this.head + " -> ");
+        for (int i = 0; i < tamanho; i++) {
+            System.out.print(atual.valor + " -> ");
+            atual = atual.prox;
+        }
+        System.out.println(this.head);
+        System.out.print(this.tail + " <- ");
+        for (int i = 0; i < tamanho; i++) {
+            System.out.print(atual2.valor + " <- ");
+            atual2 = atual2.prox;
+        }
+        System.out.println(this.tail);
+    }
+    public Node remover(int pos){
+        if (pos < 0 || pos >= tamanho) {
+            return null;
+        }
+        Node removido = this.head;
+        if (pos == 0 && tamanho == 1) {
+            this.head = null;
+            this.tail = null;
+        }else if (pos == 0) {
+            this.head = head.prox;
+            this.head.ant = this.tail;
+            removido.prox = null;
+            removido.ant = null;
+            this.tail.prox = this.head;
+        }else{
+            Node atual = this.head;
+            for (int i = 0; i < pos - 1; i++) {
+                atual = atual.prox;
+            }
+            removido = atual.prox;
+            removido.prox.ant = atual;
+            atual.prox = removido.prox;
+            if (removido.prox == head) {
+                this.tail = this.tail.ant;
+            }
+            removido.ant = null;
+            removido.prox = null;
+            this.tail.prox = this.head;
+            this.head.ant = this.tail;
+        }
+        tamanho--;
+        return removido;
+    }
+    public static void main(String[] args) {
+        ListaDuplamenteLigadaCircular lista = new ListaDuplamenteLigadaCircular();
+        lista.add(0,0);
+        lista.add(1,1);
+        lista.add(2,2);
+        lista.add(3,3);
+        lista.add(4,4);
+        lista.add(5,5);
+        lista.imprimir();
+        lista.remover(5);
+        lista.remover(4);
+        lista.remover(3);
+        lista.remover(2);
+        lista.remover(1);
+        lista.imprimir();
+        
+    }
+}
