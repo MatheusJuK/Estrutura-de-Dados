@@ -30,9 +30,9 @@ public class FilaPrioridade {
             while(atual.prox != null && novo.prioridade > atual.prox.prioridade){
                 atual = atual.prox;
             }
-            if(atual.prox == null){
-                atual.prox = novo;
-                this.tail = novo;
+            if (atual == this.head && novo.prioridade <= atual.prioridade) {
+                novo.prox = this.head;
+                this.head = novo;
             }else{
                 novo.prox = atual.prox;
                 atual.prox = novo;
@@ -86,17 +86,12 @@ public class FilaPrioridade {
     }
 
     public static void main(String[] args) {
-        FilaPrioridade fila1 = new FilaPrioridade();
-        fila1.enqueue(0);
-        fila1.enqueue(1);
-        fila1.enqueue(2);
-        fila1.enqueuePrioridade(3,1);
-        fila1.enqueuePrioridade(4,1);
-        fila1.enqueuePrioridade(5,2);
-        fila1.imprimir();
-        fila1.dequeue();
-        fila1.dequeue();
-        fila1.imprimir();
-        
+        FilaPrioridade fila = new FilaPrioridade();
+        fila.enqueuePrioridade(0, 2);
+        fila.enqueuePrioridade(1, 1);
+        fila.enqueuePrioridade(3, 2);
+        fila.imprimir();
+        fila.dequeue();
+        fila.imprimir();
     }
 }
