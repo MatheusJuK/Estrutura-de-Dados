@@ -12,7 +12,7 @@ public class ListaDuplamenteLigada<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
 
         if (pos == 0) {
             novo.prox = this.head;
@@ -66,7 +66,7 @@ public class ListaDuplamenteLigada<Tipo> {
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node<Tipo> removido = this.head;
+        Node<Tipo> removido;
         if (pos == 0) {
             removido = this.head;
             this.head = removido.prox;
@@ -97,7 +97,7 @@ public class ListaDuplamenteLigada<Tipo> {
         return removido;
     }
     public static void main(String[] args) {
-        ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<Integer>();
+        ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<>();
         lista.add(0,0);
         lista.add(1,1);
         lista.add(2,2);

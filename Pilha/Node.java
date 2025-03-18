@@ -3,6 +3,8 @@ public class Node<Tipo> {
     int prioridade;
     Node<Tipo> prox;
     Node<Tipo> ant;
+    public Node<Tipo> esquerda;
+    public Object direita;
     Node(Tipo valor){
         this.valor = valor;
         this.prioridade = 0;

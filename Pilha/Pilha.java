@@ -10,7 +10,7 @@ public class Pilha<Tipo>{
         return (this.tamanho == 0);
     }
     boolean push(Tipo valor){
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (this.isEmpty()) {
             this.topo = novo;
         }else{
@@ -46,7 +46,7 @@ public class Pilha<Tipo>{
         }
     }
     public static void main(String[] args) {
-        Pilha<Integer> pilha = new Pilha<Integer>();
+        Pilha<Integer> pilha = new Pilha<>();
         pilha.push(0);
         pilha.push(1);
         pilha.push(2);

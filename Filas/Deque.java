@@ -9,7 +9,7 @@ public class Deque<Tipo> {
     }
 
     boolean enqueueLeft(Tipo valor) {
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -22,7 +22,7 @@ public class Deque<Tipo> {
         return true;
     }
     boolean enqueueRight(Tipo valor) {
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -87,7 +87,7 @@ public class Deque<Tipo> {
     }
 
     public static void main(String[] args) {
-        Deque<Integer> deque = new Deque<Integer>();
+        Deque<Integer> deque = new Deque<>();
         deque.imprimir();
         deque.enqueueLeft(5);
         deque.enqueueLeft(10);
@@ -106,5 +106,7 @@ public class Deque<Tipo> {
         deque.dequeueLeft();
         deque.dequeueLeft();
         deque.imprimir();
+        deque.enqueueRight(1);
+        deque.dequeueRight();
     }
 }

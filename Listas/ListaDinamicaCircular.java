@@ -11,7 +11,7 @@ public class ListaDinamicaCircular<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (pos == 0) {
             if (tamanho == 0) {
                 this.head = novo;
@@ -80,7 +80,7 @@ public class ListaDinamicaCircular<Tipo> {
         return removido;
     }
     public static void main(String[] args) {
-        ListaDinamicaCircular<Integer> lista = new ListaDinamicaCircular<Integer>();
+        ListaDinamicaCircular<Integer> lista = new ListaDinamicaCircular<>();
         lista.add(0, 0);
         lista.imprimir();
         lista.remover(0);

@@ -11,7 +11,7 @@ public class ListaDinamica<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (pos == 0) {
             novo.prox = this.head;
             this.head = novo;
@@ -60,7 +60,7 @@ public class ListaDinamica<Tipo> {
         }
     }
     public static void main(String[] args) {
-        ListaDinamica<Integer> lista = new ListaDinamica<Integer>();
+        ListaDinamica<Integer> lista = new ListaDinamica<>();
         lista.add(0, 0);
         lista.add(1, 1);
         lista.add(2, 2);

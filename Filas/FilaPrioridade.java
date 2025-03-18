@@ -9,7 +9,7 @@ public class FilaPrioridade<Tipo> {
     }
 
     boolean enqueue(Tipo valor) {
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -21,7 +21,7 @@ public class FilaPrioridade<Tipo> {
         return true;
     }
     boolean enqueuePrioridade(Tipo valor,int prioridade) {
-        Node<Tipo> novo = new Node<Tipo>(valor,prioridade); 
+        Node<Tipo> novo = new Node<>(valor,prioridade); 
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -89,12 +89,13 @@ public class FilaPrioridade<Tipo> {
     }
 
     public static void main(String[] args) {
-        FilaPrioridade<Integer> fila = new FilaPrioridade<Integer>();
+        FilaPrioridade<Integer> fila = new FilaPrioridade<>();
         fila.enqueuePrioridade(0, 10);
         fila.enqueuePrioridade(1, 11);
         fila.enqueuePrioridade(1, 1);
         fila.enqueuePrioridade(2, 11);
         fila.enqueuePrioridade(5, 15);
+        fila.enqueue(1);
         fila.imprimir();
         fila.dequeue();
         fila.imprimir();

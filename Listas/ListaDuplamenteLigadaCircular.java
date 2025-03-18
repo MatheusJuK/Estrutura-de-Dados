@@ -12,7 +12,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -94,7 +94,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         return removido;
     }
     public static void main(String[] args) {
-        ListaDuplamenteLigadaCircular<Integer> lista = new ListaDuplamenteLigadaCircular<Integer>();
+        ListaDuplamenteLigadaCircular<Integer> lista = new ListaDuplamenteLigadaCircular<>();
         lista.add(0,0);
         lista.add(1,1);
         lista.add(2,2);

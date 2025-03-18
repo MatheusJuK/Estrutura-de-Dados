@@ -9,7 +9,7 @@ public class Fila<Tipo> {
     }
 
     boolean enqueue(Tipo valor) {
-        Node<Tipo> novo = new Node<Tipo>(valor);
+        Node<Tipo> novo = new Node<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -61,7 +61,7 @@ public class Fila<Tipo> {
     }
 
     public static void main(String[] args) {
-        Fila<Integer> fila = new Fila<Integer>();
+        Fila<Integer> fila = new Fila<>();
         fila.enqueue(5);
         fila.enqueue(10);
         fila.imprimir();
