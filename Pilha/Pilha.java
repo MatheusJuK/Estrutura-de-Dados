@@ -1,6 +1,6 @@
-public class Pilha{
+public class Pilha<Tipo>{
     int tamanho;
-    Node topo;
+    Node<Tipo> topo;
 
     Pilha(){
         this.tamanho = 0;
@@ -9,8 +9,8 @@ public class Pilha{
     boolean isEmpty(){
         return (this.tamanho == 0);
     }
-    boolean push(int valor){
-        Node novo = new Node(valor);
+    boolean push(Tipo valor){
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (this.isEmpty()) {
             this.topo = novo;
         }else{
@@ -20,23 +20,23 @@ public class Pilha{
         tamanho++;
         return true;
     }
-    Node pop(){
+    Node<Tipo> pop(){
         if (this.isEmpty()) {
             return null;
         }else{
-            Node removido = this.topo;
+            Node<Tipo> removido = this.topo;
             this.topo = this.topo.prox;
             removido.prox = null;
             tamanho--;
             return removido;
         }
     }
-    Node peek(){
+    Node<Tipo> peek(){
         System.out.println(this.topo.valor + " está no topo");
         return this.topo;
     }
     public void imprimir(){
-        Node atual = this.topo;
+        Node<Tipo> atual = this.topo;
         while (atual.prox != null) {
             if (atual == this.topo) {
                 System.out.println(atual.valor + " <- topo");
@@ -46,7 +46,7 @@ public class Pilha{
         }
     }
     public static void main(String[] args) {
-        Pilha pilha = new Pilha();
+        Pilha<Integer> pilha = new Pilha<Integer>();
         pilha.push(0);
         pilha.push(1);
         pilha.push(2);

@@ -1,5 +1,5 @@
-public class Fila {
-    Node head, tail;
+public class Fila<Tipo> {
+    Node<Tipo> head, tail;
     int tamanho;
 
     Fila() {
@@ -8,8 +8,8 @@ public class Fila {
         this.tamanho = 0;
     }
 
-    boolean enqueue(int valor) {
-        Node novo = new Node(valor);
+    boolean enqueue(Tipo valor) {
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -22,7 +22,7 @@ public class Fila {
     }
 
     void imprimir() {
-        Node atual = this.head;
+        Node<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
@@ -34,19 +34,19 @@ public class Fila {
         System.out.println();
     }
 
-    Node dequeue() {
+    Node<Tipo> dequeue() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na fila");
             return null;
         }
-        Node elemento;
+        Node<Tipo> elemento;
 
         if (this.head == this.tail) {
             elemento = this.head;
             this.head = null;
             this.tail = null;
         } else {
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             while(atual.prox != this.tail){
                 atual = atual.prox;
             }
@@ -61,11 +61,11 @@ public class Fila {
     }
 
     public static void main(String[] args) {
-        Fila fila1 = new Fila();
-        fila1.enqueue(5);
-        fila1.enqueue(10);
-        fila1.imprimir();
-        fila1.dequeue();
-        fila1.imprimir();
+        Fila<Integer> fila = new Fila<Integer>();
+        fila.enqueue(5);
+        fila.enqueue(10);
+        fila.imprimir();
+        fila.dequeue();
+        fila.imprimir();
     }
 }

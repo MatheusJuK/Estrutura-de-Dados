@@ -1,15 +1,15 @@
-public class Node {
-    int valor;
+public class Node<Tipo> {
+    Tipo valor;
     int prioridade;
-    Node prox;
-    Node ant;
-    Node(int valor){
+    Node<Tipo> prox;
+    Node<Tipo> ant;
+    Node(Tipo valor){
         this.valor = valor;
         this.prioridade = 0;
         this.prox = null;
         this.ant = null;
     }
-    Node(int valor,int prioridade){
+    Node(Tipo valor,int prioridade){
         this.valor = valor;
         this.prioridade = prioridade;
         this.prox = null;

@@ -1,5 +1,5 @@
-public class Deque {
-    Node head, tail;
+public class Deque<Tipo> {
+    Node<Tipo> head, tail;
     int tamanho;
 
     Deque() {
@@ -8,8 +8,8 @@ public class Deque {
         this.tamanho = 0;
     }
 
-    boolean enqueueLeft(int valor) {
-        Node novo = new Node(valor);
+    boolean enqueueLeft(Tipo valor) {
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -21,8 +21,8 @@ public class Deque {
         tamanho++;
         return true;
     }
-    boolean enqueueRight(int valor) {
-        Node novo = new Node(valor);
+    boolean enqueueRight(Tipo valor) {
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -36,7 +36,7 @@ public class Deque {
     }
 
     void imprimir() {
-        Node atual = this.head;
+        Node<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
@@ -49,11 +49,11 @@ public class Deque {
         System.out.println();
     }
 
-    Node dequeueLeft() {
+    Node<Tipo> dequeueLeft() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
-        Node elemento;
+        Node<Tipo> elemento;
         if (head == tail) {
             elemento = this.head;
             this.head = null;
@@ -67,11 +67,11 @@ public class Deque {
         tamanho--;
         return elemento;
     }
-    Node dequeueRight() {
+    Node<Tipo> dequeueRight() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
-        Node elemento;
+        Node<Tipo> elemento;
         if (head == tail) {
             elemento = this.head;
             this.head = null;
@@ -87,24 +87,24 @@ public class Deque {
     }
 
     public static void main(String[] args) {
-        Deque deque1 = new Deque();
-        deque1.imprimir();
-        deque1.enqueueLeft(5);
-        deque1.enqueueLeft(10);
-        deque1.enqueueLeft(15);
-        deque1.enqueueLeft(20);
-        deque1.enqueueLeft(25);
-        deque1.enqueueLeft(30);
-        deque1.enqueueLeft(35);
-        deque1.enqueueLeft(40);
-        deque1.enqueueLeft(45);
-        deque1.imprimir();
-        deque1.dequeueLeft();
-        deque1.dequeueLeft();
-        deque1.dequeueLeft();
-        deque1.dequeueLeft();
-        deque1.dequeueLeft();
-        deque1.dequeueLeft();
-        deque1.imprimir();
+        Deque<Integer> deque = new Deque<Integer>();
+        deque.imprimir();
+        deque.enqueueLeft(5);
+        deque.enqueueLeft(10);
+        deque.enqueueLeft(15);
+        deque.enqueueLeft(20);
+        deque.enqueueLeft(25);
+        deque.enqueueLeft(30);
+        deque.enqueueLeft(35);
+        deque.enqueueLeft(40);
+        deque.enqueueLeft(45);
+        deque.imprimir();
+        deque.dequeueLeft();
+        deque.dequeueLeft();
+        deque.dequeueLeft();
+        deque.dequeueLeft();
+        deque.dequeueLeft();
+        deque.dequeueLeft();
+        deque.imprimir();
     }
 }

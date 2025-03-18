@@ -1,5 +1,5 @@
-public class ListaDinamica {
-    Node head;
+public class ListaDinamica<Tipo> {
+    Node<Tipo> head;
     int tamanho;
 
     ListaDinamica(){
@@ -7,16 +7,16 @@ public class ListaDinamica {
         this.tamanho = 0;
     }
 
-    boolean add(int valor, int pos){
+    boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node novo = new Node(valor);
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (pos == 0) {
             novo.prox = this.head;
             this.head = novo;
         }else{
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -27,7 +27,7 @@ public class ListaDinamica {
         return true;
     }
     public void imprimir() {
-        Node atual = this.head;
+        Node<Tipo> atual = this.head;
         System.out.print("head -> ");
         while (atual != null) {
             System.out.print(atual.valor + " -> ");
@@ -36,11 +36,11 @@ public class ListaDinamica {
         System.out.println("null");
     }
 
-    public Node remover(int pos) {
+    public Node<Tipo> remover(int pos) {
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node removido;
+        Node<Tipo> removido;
         if (pos == 0) {
             removido = this.head;
             this.head = removido.prox;
@@ -48,7 +48,7 @@ public class ListaDinamica {
             tamanho--;
             return removido;
         } else {
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -60,7 +60,7 @@ public class ListaDinamica {
         }
     }
     public static void main(String[] args) {
-        ListaDinamica lista = new ListaDinamica();
+        ListaDinamica<Integer> lista = new ListaDinamica<Integer>();
         lista.add(0, 0);
         lista.add(1, 1);
         lista.add(2, 2);

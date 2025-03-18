@@ -1,5 +1,5 @@
-public class ListaDuplamenteLigada {
-    Node head,tail;
+public class ListaDuplamenteLigada<Tipo> {
+    Node<Tipo> head,tail;
     int tamanho;
 
     ListaDuplamenteLigada(){
@@ -8,11 +8,11 @@ public class ListaDuplamenteLigada {
         this.tamanho = 0;
     }
 
-    boolean add(int valor, int pos){
+    boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node novo = new Node(valor);
+        Node<Tipo> novo = new Node<Tipo>(valor);
 
         if (pos == 0) {
             novo.prox = this.head;
@@ -29,7 +29,7 @@ public class ListaDuplamenteLigada {
             this.tail.prox = novo;
             this.tail = novo;
         } else{
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -44,8 +44,8 @@ public class ListaDuplamenteLigada {
         return true;
     }
     public void imprimir() {
-        Node atual = this.head;
-        Node atual2 = this.tail;
+        Node<Tipo> atual = this.head;
+        Node<Tipo> atual2 = this.tail;
         System.out.print("head -> ");
 
         while (atual != null) {
@@ -62,11 +62,11 @@ public class ListaDuplamenteLigada {
 
     }
 
-    public Node remover(int pos) {
+    public Node<Tipo> remover(int pos) {
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node removido = this.head;
+        Node<Tipo> removido = this.head;
         if (pos == 0) {
             removido = this.head;
             this.head = removido.prox;
@@ -76,7 +76,7 @@ public class ListaDuplamenteLigada {
                 this.tail = null;
             }
         }else {
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -97,7 +97,7 @@ public class ListaDuplamenteLigada {
         return removido;
     }
     public static void main(String[] args) {
-        ListaDuplamenteLigada lista = new ListaDuplamenteLigada();
+        ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<Integer>();
         lista.add(0,0);
         lista.add(1,1);
         lista.add(2,2);

@@ -1,5 +1,5 @@
-public class FilaPrioridade {
-    Node head, tail;
+public class FilaPrioridade<Tipo> {
+    Node<Tipo> head, tail;
     int tamanho;
 
     FilaPrioridade() {
@@ -8,8 +8,8 @@ public class FilaPrioridade {
         this.tamanho = 0;
     }
 
-    boolean enqueue(int valor) {
-        Node novo = new Node(valor);
+    boolean enqueue(Tipo valor) {
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -20,19 +20,22 @@ public class FilaPrioridade {
         tamanho++;
         return true;
     }
-    boolean enqueuePrioridade(int valor,int prioridade) {
-        Node novo = new Node(valor,prioridade);
+    boolean enqueuePrioridade(Tipo valor,int prioridade) {
+        Node<Tipo> novo = new Node<Tipo>(valor,prioridade); 
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
         } else {
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             while(atual.prox != null && novo.prioridade > atual.prox.prioridade){
                 atual = atual.prox;
             }
             if (atual == this.head && novo.prioridade <= atual.prioridade) {
                 novo.prox = this.head;
                 this.head = novo;
+            }else if(atual == this.tail && novo.prioridade > atual.prioridade){
+                atual.prox = novo;
+                this.tail = novo;
             }else{
                 novo.prox = atual.prox;
                 atual.prox = novo;
@@ -43,7 +46,7 @@ public class FilaPrioridade {
     }
 
     void imprimir() {
-        Node atual = this.head;
+        Node<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
@@ -56,19 +59,19 @@ public class FilaPrioridade {
         System.out.println();
     }
 
-    Node dequeue() {
+    Node<Tipo> dequeue() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na fila");
             return null;
         }
-        Node elemento;
+        Node<Tipo> elemento;
 
         if (this.head == this.tail) {
             elemento = this.head;
             this.head = null;
             this.tail = null;
         } else {
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             while(atual.prox != this.tail){
                 atual = atual.prox;
             }
@@ -86,10 +89,12 @@ public class FilaPrioridade {
     }
 
     public static void main(String[] args) {
-        FilaPrioridade fila = new FilaPrioridade();
-        fila.enqueuePrioridade(0, 2);
+        FilaPrioridade<Integer> fila = new FilaPrioridade<Integer>();
+        fila.enqueuePrioridade(0, 10);
+        fila.enqueuePrioridade(1, 11);
         fila.enqueuePrioridade(1, 1);
-        fila.enqueuePrioridade(3, 2);
+        fila.enqueuePrioridade(2, 11);
+        fila.enqueuePrioridade(5, 15);
         fila.imprimir();
         fila.dequeue();
         fila.imprimir();

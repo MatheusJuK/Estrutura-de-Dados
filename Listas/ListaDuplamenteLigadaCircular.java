@@ -1,5 +1,5 @@
-public class ListaDuplamenteLigadaCircular {
-    Node head,tail;
+public class ListaDuplamenteLigadaCircular<Tipo> {
+    Node<Tipo> head,tail;
     int tamanho;
 
     ListaDuplamenteLigadaCircular(){
@@ -8,11 +8,11 @@ public class ListaDuplamenteLigadaCircular {
         this.tamanho = 0;
     }
 
-    boolean add(int valor, int pos){
+    boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node novo = new Node(valor);
+        Node<Tipo> novo = new Node<Tipo>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -32,7 +32,7 @@ public class ListaDuplamenteLigadaCircular {
             this.head.ant = this.tail;
             this.tail.prox = this.head;
         }else{
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -45,8 +45,8 @@ public class ListaDuplamenteLigadaCircular {
         return true;
     }
     public void imprimir(){
-        Node atual = this.head;
-        Node atual2 = this.head;
+        Node<Tipo> atual = this.head;
+        Node<Tipo> atual2 = this.head;
         System.out.print(this.head + " -> ");
         for (int i = 0; i < tamanho; i++) {
             System.out.print(atual.valor + " -> ");
@@ -60,11 +60,11 @@ public class ListaDuplamenteLigadaCircular {
         }
         System.out.println(this.tail);
     }
-    public Node remover(int pos){
+    public Node<Tipo> remover(int pos){
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node removido = this.head;
+        Node<Tipo> removido = this.head;
         if (pos == 0 && tamanho == 1) {
             this.head = null;
             this.tail = null;
@@ -75,7 +75,7 @@ public class ListaDuplamenteLigadaCircular {
             removido.ant = null;
             this.tail.prox = this.head;
         }else{
-            Node atual = this.head;
+            Node<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -94,7 +94,7 @@ public class ListaDuplamenteLigadaCircular {
         return removido;
     }
     public static void main(String[] args) {
-        ListaDuplamenteLigadaCircular lista = new ListaDuplamenteLigadaCircular();
+        ListaDuplamenteLigadaCircular<Integer> lista = new ListaDuplamenteLigadaCircular<Integer>();
         lista.add(0,0);
         lista.add(1,1);
         lista.add(2,2);

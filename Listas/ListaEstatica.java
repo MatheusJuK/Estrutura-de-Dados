@@ -1,14 +1,15 @@
-public class ListaEstatica {
+public class ListaEstatica<Tipo> {
     int ultimo;
     int tamanho;
-    int[] valores;
+    Tipo[] valores;
+    @SuppressWarnings("unchecked")
     ListaEstatica(int tamanho){
         this.tamanho = tamanho;
-        this.valores = new int[tamanho];
+        this.valores = (Tipo[]) new Object[tamanho];
         this.ultimo = -1;
     }
     
-    boolean add(int valor, int pos){
+    boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > ultimo + 1 || pos > tamanho - 1) {
             return false;
         }
@@ -37,18 +38,13 @@ public class ListaEstatica {
         System.out.println();
     }
     public static void main(String[] args) {
-        ListaEstatica lista = new ListaEstatica(10);
-        lista.add(0, 0);
-        lista.add(1, 1);
-        lista.add(2, 2);
-        lista.add(3, 3);
-        lista.add(4, 4);
-        lista.add(5, 5);
-        lista.add(6, 6);
-        lista.add(7, 7);
-        lista.add(8, 8);
-        lista.add(9, 9);
+        ListaEstatica<String> lista = new ListaEstatica<String>(10);
+        lista.add("A", 0);
         lista.imprimir();
+        lista.add("E", 1);
+        lista.add("I", 2);
+        lista.add("O", 3);
+        lista.add("U", 4);
         lista.imprimir();
     }
 }
