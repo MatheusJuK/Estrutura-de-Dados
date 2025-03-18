@@ -33,7 +33,7 @@ public class FilaPrioridade<Tipo> {
             if (atual == this.head && novo.prioridade <= atual.prioridade) {
                 novo.prox = this.head;
                 this.head = novo;
-            }else if(atual == this.tail && novo.prioridade > atual.prioridade){
+            }else if(atual == this.tail){
                 atual.prox = novo;
                 this.tail = novo;
             }else{
