@@ -108,6 +108,5 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         lista.remover(2);
         lista.remover(1);
         lista.imprimir();
-        
     }
 }
