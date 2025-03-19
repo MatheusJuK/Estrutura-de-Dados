@@ -1,18 +1,21 @@
-class Node<Tipo> {
+package Fila;
+
+public class NodeFilas<Tipo> {
     Tipo valor;
     int prioridade;
-    Node<Tipo> prox;
-    Node<Tipo> ant;
-    Node(Tipo valor){
+    NodeFilas<Tipo> prox;
+    NodeFilas<Tipo> ant;
+    public NodeFilas(Tipo valor){
         this.valor = valor;
         this.prioridade = 0;
         this.prox = null;
         this.ant = null;
     }
-    Node(Tipo valor,int prioridade){
+    public NodeFilas(Tipo valor,int prioridade){
         this.valor = valor;
         this.prioridade = prioridade;
         this.prox = null;
         this.ant = null;
     }
 }
+

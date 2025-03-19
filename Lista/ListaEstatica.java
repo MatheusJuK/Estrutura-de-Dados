@@ -1,9 +1,10 @@
+package Lista;
 public class ListaEstatica<Tipo> {
     int ultimo;
     int tamanho;
     Tipo[] valores;
     @SuppressWarnings("unchecked")
-    ListaEstatica(int tamanho){
+    public ListaEstatica(int tamanho){
         this.tamanho = tamanho;
         this.valores = (Tipo[]) new Object[tamanho];
         this.ultimo = -1;

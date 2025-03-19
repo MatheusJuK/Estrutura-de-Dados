@@ -1,15 +1,17 @@
+package Fila;
+
 public class FilaPrioridade<Tipo> {
-    Node<Tipo> head, tail;
+    NodeFilas<Tipo> head, tail;
     int tamanho;
 
-    FilaPrioridade() {
+    public FilaPrioridade() {
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
     }
 
     boolean enqueue(Tipo valor) {
-        Node<Tipo> novo = new Node<>(valor);
+        NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -21,12 +23,12 @@ public class FilaPrioridade<Tipo> {
         return true;
     }
     boolean enqueuePrioridade(Tipo valor,int prioridade) {
-        Node<Tipo> novo = new Node<>(valor,prioridade); 
+        NodeFilas<Tipo> novo = new NodeFilas<>(valor,prioridade); 
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
         } else {
-            Node<Tipo> atual = this.head;
+            NodeFilas<Tipo> atual = this.head;
             while(atual.prox != null && novo.prioridade > atual.prox.prioridade){
                 atual = atual.prox;
             }
@@ -46,7 +48,7 @@ public class FilaPrioridade<Tipo> {
     }
 
     void imprimir() {
-        Node<Tipo> atual = this.head;
+        NodeFilas<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
@@ -59,19 +61,19 @@ public class FilaPrioridade<Tipo> {
         System.out.println();
     }
 
-    Node<Tipo> dequeue() {
+    NodeFilas<Tipo> dequeue() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na fila");
             return null;
         }
-        Node<Tipo> elemento;
+        NodeFilas<Tipo> elemento;
 
         if (this.head == this.tail) {
             elemento = this.head;
             this.head = null;
             this.tail = null;
         } else {
-            Node<Tipo> atual = this.head;
+            NodeFilas<Tipo> atual = this.head;
             while(atual.prox != this.tail){
                 atual = atual.prox;
             }

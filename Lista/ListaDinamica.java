@@ -1,22 +1,23 @@
+package Lista;
 public class ListaDinamica<Tipo> {
-    Node<Tipo> head;
+    NodeListas<Tipo> head;
     int tamanho;
 
-    ListaDinamica(){
+    public ListaDinamica(){
         this.head = null;
         this.tamanho = 0;
     }
 
-    boolean add(Tipo valor, int pos){
+    public boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<>(valor);
+        NodeListas<Tipo> novo = new NodeListas<>(valor);
         if (pos == 0) {
             novo.prox = this.head;
             this.head = novo;
         }else{
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -27,7 +28,7 @@ public class ListaDinamica<Tipo> {
         return true;
     }
     public void imprimir() {
-        Node<Tipo> atual = this.head;
+        NodeListas<Tipo> atual = this.head;
         System.out.print("head -> ");
         while (atual != null) {
             System.out.print(atual.valor + " -> ");
@@ -36,11 +37,11 @@ public class ListaDinamica<Tipo> {
         System.out.println("null");
     }
 
-    public Node<Tipo> remover(int pos) {
+    public NodeListas<Tipo> remover(int pos) {
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node<Tipo> removido;
+        NodeListas<Tipo> removido;
         if (pos == 0) {
             removido = this.head;
             this.head = removido.prox;
@@ -48,7 +49,7 @@ public class ListaDinamica<Tipo> {
             tamanho--;
             return removido;
         } else {
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }

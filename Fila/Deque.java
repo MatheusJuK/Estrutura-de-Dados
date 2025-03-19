@@ -1,15 +1,17 @@
+package Fila;
+
 public class Deque<Tipo> {
-    Node<Tipo> head, tail;
+    NodeFilas<Tipo> head, tail;
     int tamanho;
 
-    Deque() {
+    public Deque() {
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
     }
 
     boolean enqueueLeft(Tipo valor) {
-        Node<Tipo> novo = new Node<>(valor);
+        NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -22,7 +24,7 @@ public class Deque<Tipo> {
         return true;
     }
     boolean enqueueRight(Tipo valor) {
-        Node<Tipo> novo = new Node<>(valor);
+        NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -36,7 +38,7 @@ public class Deque<Tipo> {
     }
 
     void imprimir() {
-        Node<Tipo> atual = this.head;
+        NodeFilas<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
                 System.out.print(atual.valor);
@@ -49,11 +51,11 @@ public class Deque<Tipo> {
         System.out.println();
     }
 
-    Node<Tipo> dequeueLeft() {
+    NodeFilas<Tipo> dequeueLeft() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
-        Node<Tipo> elemento;
+        NodeFilas<Tipo> elemento;
         if (head == tail) {
             elemento = this.head;
             this.head = null;
@@ -67,11 +69,11 @@ public class Deque<Tipo> {
         tamanho--;
         return elemento;
     }
-    Node<Tipo> dequeueRight() {
+    NodeFilas<Tipo> dequeueRight() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
-        Node<Tipo> elemento;
+        NodeFilas<Tipo> elemento;
         if (head == tail) {
             elemento = this.head;
             this.head = null;

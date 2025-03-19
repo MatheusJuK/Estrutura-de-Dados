@@ -1,8 +1,10 @@
+package Pilhas;
+
 public class Pilha<Tipo>{
     int tamanho;
-    Node<Tipo> topo;
+    NodePilha<Tipo> topo;
 
-    Pilha(){
+    public Pilha(){
         this.tamanho = 0;
         this.topo = null;
     }
@@ -10,7 +12,7 @@ public class Pilha<Tipo>{
         return (this.tamanho == 0);
     }
     boolean push(Tipo valor){
-        Node<Tipo> novo = new Node<>(valor);
+        NodePilha<Tipo> novo = new NodePilha<>(valor);
         if (this.isEmpty()) {
             this.topo = novo;
         }else{
@@ -20,23 +22,23 @@ public class Pilha<Tipo>{
         tamanho++;
         return true;
     }
-    Node<Tipo> pop(){
+    NodePilha<Tipo> pop(){
         if (this.isEmpty()) {
             return null;
         }else{
-            Node<Tipo> removido = this.topo;
+            NodePilha<Tipo> removido = this.topo;
             this.topo = this.topo.prox;
             removido.prox = null;
             tamanho--;
             return removido;
         }
     }
-    Node<Tipo> peek(){
+    NodePilha<Tipo> peek(){
         System.out.println(this.topo.valor + " está no topo");
         return this.topo;
     }
     public void imprimir(){
-        Node<Tipo> atual = this.topo;
+        NodePilha<Tipo> atual = this.topo;
         while (atual.prox != null) {
             if (atual == this.topo) {
                 System.out.println(atual.valor + " <- topo");

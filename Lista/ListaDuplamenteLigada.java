@@ -1,8 +1,9 @@
+package Lista;
 public class ListaDuplamenteLigada<Tipo> {
-    Node<Tipo> head,tail;
+    NodeListas<Tipo> head,tail;
     int tamanho;
 
-    ListaDuplamenteLigada(){
+    public ListaDuplamenteLigada(){
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
@@ -12,7 +13,7 @@ public class ListaDuplamenteLigada<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<>(valor);
+        NodeListas<Tipo> novo = new NodeListas<>(valor);
 
         if (pos == 0) {
             novo.prox = this.head;
@@ -29,7 +30,7 @@ public class ListaDuplamenteLigada<Tipo> {
             this.tail.prox = novo;
             this.tail = novo;
         } else{
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -44,8 +45,8 @@ public class ListaDuplamenteLigada<Tipo> {
         return true;
     }
     public void imprimir() {
-        Node<Tipo> atual = this.head;
-        Node<Tipo> atual2 = this.tail;
+        NodeListas<Tipo> atual = this.head;
+        NodeListas<Tipo> atual2 = this.tail;
         System.out.print("head -> ");
 
         while (atual != null) {
@@ -62,11 +63,11 @@ public class ListaDuplamenteLigada<Tipo> {
 
     }
 
-    public Node<Tipo> remover(int pos) {
+    public NodeListas<Tipo> remover(int pos) {
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node<Tipo> removido;
+        NodeListas<Tipo> removido;
         if (pos == 0) {
             removido = this.head;
             this.head = removido.prox;
@@ -76,7 +77,7 @@ public class ListaDuplamenteLigada<Tipo> {
                 this.tail = null;
             }
         }else {
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }

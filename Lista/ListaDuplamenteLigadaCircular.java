@@ -1,8 +1,9 @@
+package Lista;
 public class ListaDuplamenteLigadaCircular<Tipo> {
-    Node<Tipo> head,tail;
+    NodeListas<Tipo> head,tail;
     int tamanho;
 
-    ListaDuplamenteLigadaCircular(){
+    public ListaDuplamenteLigadaCircular(){
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
@@ -12,7 +13,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         if (pos < 0 || pos > tamanho) {
             return false;
         }
-        Node<Tipo> novo = new Node<>(valor);
+        NodeListas<Tipo> novo = new NodeListas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
             this.tail = novo;
@@ -32,7 +33,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
             this.head.ant = this.tail;
             this.tail.prox = this.head;
         }else{
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
@@ -45,8 +46,8 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         return true;
     }
     public void imprimir(){
-        Node<Tipo> atual = this.head;
-        Node<Tipo> atual2 = this.head;
+        NodeListas<Tipo> atual = this.head;
+        NodeListas<Tipo> atual2 = this.head;
         System.out.print(this.head + " -> ");
         for (int i = 0; i < tamanho; i++) {
             System.out.print(atual.valor + " -> ");
@@ -60,11 +61,11 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         }
         System.out.println(this.tail);
     }
-    public Node<Tipo> remover(int pos){
+    public NodeListas<Tipo> remover(int pos){
         if (pos < 0 || pos >= tamanho) {
             return null;
         }
-        Node<Tipo> removido = this.head;
+        NodeListas<Tipo> removido = this.head;
         if (pos == 0 && tamanho == 1) {
             this.head = null;
             this.tail = null;
@@ -75,7 +76,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
             removido.ant = null;
             this.tail.prox = this.head;
         }else{
-            Node<Tipo> atual = this.head;
+            NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
