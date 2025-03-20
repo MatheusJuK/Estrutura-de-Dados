@@ -35,7 +35,7 @@ public class Arvore<Tipo extends Comparable> {
             }
         }
     }
-
+    
     public void EmOrdem(NodeArvore<Tipo> atual){
         if (atual != null) {
             EmOrdem(atual.esquerda);
@@ -57,12 +57,71 @@ public class Arvore<Tipo extends Comparable> {
             System.out.println(atual.valor);
         }
     }
-
+    
+    @SuppressWarnings("unchecked")
+    public void herdarFilhos(NodeArvore<Tipo> atual, NodeArvore<Tipo> paiAtual, NodeArvore<Tipo> substituto){
+        if (paiAtual != null) {
+            if (atual.valor.compareTo(paiAtual.valor) == -1) {
+                if (atual.direita == substituto) {
+                    substituto.esquerda = atual.esquerda;
+                    paiAtual.esquerda = substituto;
+                }else if (atual.esquerda == substituto) {
+                    substituto.direita = atual.direita;
+                    paiAtual.esquerda = substituto;
+                }else{
+                    substituto.esquerda = atual.esquerda;
+                    substituto.direita = atual.direita;
+                    paiAtual.esquerda = substituto;
+                }
+            }else{
+                if (atual.direita == substituto) {
+                    substituto.esquerda = atual.esquerda;
+                    paiAtual.direita = substituto;
+                }else if (atual.esquerda == substituto) {
+                    substituto.direita = atual.direita;
+                    paiAtual.direita = substituto;
+                }else{
+                    substituto.esquerda = atual.esquerda;
+                    substituto.direita = atual.direita;
+                    paiAtual.direita = substituto;
+                }
+            }
+        }else{
+            if (this.raiz.direita == substituto) {
+                substituto.esquerda = this.raiz.esquerda;
+                this.raiz = substituto;
+            }else if (this.raiz.esquerda == substituto) {
+                substituto.direita = atual.direita;
+                this.raiz = substituto;
+            }else{
+                substituto.esquerda = atual.esquerda;
+                substituto.direita = atual.direita;
+                this.raiz = substituto;
+            }
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public void matarLigacaoSubstituto(NodeArvore<Tipo> substituto, NodeArvore<Tipo> paiSubstituto){
+        if (substituto.valor.compareTo(paiSubstituto.valor) == -1) {
+            if (paiSubstituto == this.raiz) {
+                paiSubstituto.esquerda = null;
+                paiSubstituto.direita = null;
+            }else{
+                paiSubstituto.esquerda = null;
+            }
+        }else{
+            if (paiSubstituto == this.raiz) {
+                paiSubstituto.esquerda = null;
+                paiSubstituto.direita = null;
+            }else{
+                paiSubstituto.direita = null;
+            }
+        }
+    }
     @SuppressWarnings("unchecked")
     public NodeArvore<Tipo> remover(Tipo valor){
         NodeArvore<Tipo> atual = this.raiz;
         NodeArvore<Tipo> paiAtual = null;
-        NodeArvore<Tipo> removido;
         while (atual != null) {
             if (atual.valor.equals(valor)) {
                 break;
@@ -75,7 +134,7 @@ public class Arvore<Tipo extends Comparable> {
             }
         }
         if(atual != null){
-            removido = atual;
+            NodeArvore<Tipo> removido = atual;
             if (atual.direita != null) {
                 NodeArvore<Tipo> substituto = atual.direita;
                 NodeArvore<Tipo> paiSubstituto = atual;
@@ -83,50 +142,8 @@ public class Arvore<Tipo extends Comparable> {
                     paiSubstituto = substituto;
                     substituto = substituto.esquerda;
                 }
-                if (paiAtual != null) {
-                    if (atual.valor.compareTo(paiAtual.valor) == -1) {
-                        if (atual.direita == substituto) {
-                            substituto.esquerda = atual.esquerda;
-                            paiAtual.esquerda = substituto;
-                        }else if (atual.esquerda == substituto) {
-                            substituto.direita = atual.direita;
-                            paiAtual.esquerda = substituto;
-                        }else{
-                            substituto.esquerda = atual.esquerda;
-                            substituto.direita = atual.direita;
-                            paiAtual.esquerda = substituto;
-                        }
-                    }else{
-                        if (atual.direita == substituto) {
-                            substituto.esquerda = atual.esquerda;
-                            paiAtual.direita = substituto;
-                        }else if (atual.esquerda == substituto) {
-                            substituto.direita = atual.direita;
-                            paiAtual.direita = substituto;
-                        }else{
-                            substituto.esquerda = atual.esquerda;
-                            substituto.direita = atual.direita;
-                            paiAtual.direita = substituto;
-                        }
-                    }
-                }else{
-                    if (this.raiz.direita == substituto) {
-                        substituto.esquerda = this.raiz.esquerda;
-                        this.raiz = substituto;
-                    }else if (this.raiz.esquerda == substituto) {
-                        substituto.direita = atual.direita;
-                        this.raiz = substituto;
-                    }else{
-                        substituto.esquerda = atual.esquerda;
-                        substituto.direita = atual.direita;
-                        this.raiz = substituto;
-                    }
-                }
-                if (substituto.valor.compareTo(paiSubstituto.valor) == -1) {
-                    paiSubstituto.esquerda = null;
-                }else{
-                    paiSubstituto.direita = null;
-                }
+                herdarFilhos(atual, paiAtual, substituto);
+                matarLigacaoSubstituto(substituto, paiSubstituto);
             }else if (atual.esquerda != null) {
                 NodeArvore<Tipo> substituto = atual.esquerda;
                 NodeArvore<Tipo> paiSubstituto = atual;
@@ -134,62 +151,15 @@ public class Arvore<Tipo extends Comparable> {
                     paiSubstituto = substituto;
                     substituto = substituto.direita;
                 }
-                if (paiAtual != null) {
-                    if (atual.valor.compareTo(paiAtual.valor) == -1) {
-                        if (atual.direita == substituto) {
-                            substituto.esquerda = atual.esquerda;
-                            paiAtual.esquerda = substituto;
-                        }else if (atual.esquerda == substituto) {
-                            substituto.direita = atual.direita;
-                            paiAtual.esquerda = substituto;
-                        }else{
-                            substituto.esquerda = atual.esquerda;
-                            substituto.direita = atual.direita;
-                            paiAtual.esquerda = substituto;
-                        }
-                    }else{
-                        if (atual.direita == substituto) {
-                            substituto.esquerda = atual.esquerda;
-                            paiAtual.direita = substituto;
-                        }else if (atual.esquerda == substituto) {
-                            substituto.direita = atual.direita;
-                            paiAtual.direita = substituto;
-                        }else{
-                            substituto.esquerda = atual.esquerda;
-                            substituto.direita = atual.direita;
-                            paiAtual.direita = substituto;
-                        }
-                    }
-                }else{
-                    if (this.raiz.direita == substituto) {
-                        substituto.esquerda = this.raiz.esquerda;
-                        this.raiz = substituto;
-                    }else if (this.raiz.esquerda == substituto) {
-                        substituto.direita = atual.direita;
-                        this.raiz = substituto;
-                    }else{
-                        substituto.esquerda = atual.esquerda;
-                        substituto.direita = atual.direita;
-                        this.raiz = substituto;
-                    }
-                }
-                if (substituto.valor.compareTo(paiSubstituto.valor) == -1) {
-                    paiSubstituto.esquerda = null;
-                }else{
-                    paiSubstituto.direita = null;
-                }
+                herdarFilhos(atual, paiAtual, substituto);
+                matarLigacaoSubstituto(substituto, paiSubstituto);
             }else{
                 if (paiAtual != null) {
-                    if (atual.valor.compareTo(paiAtual.valor) == -1) {
-                        paiAtual.esquerda = null;
-                    }else{
-                        paiAtual.direita = null;
-                    }
+                    matarLigacaoSubstituto(atual, paiAtual);
                 }else{
                     this.raiz = null;
                 }
             }
-
             return removido;
         }else{
             return null;
@@ -230,6 +200,18 @@ public class Arvore<Tipo extends Comparable> {
         arvore.add(20);
         arvore.add(17);
         arvore.add(22);
+        arvore.remover(7);
+        arvore.remover(10);
+        arvore.remover(22);
+        arvore.remover(5);
+        arvore.remover(2);
+        arvore.remover(6);
+        arvore.remover(17);
+        arvore.remover(9);
+        arvore.remover(4);
+        arvore.remover(15);
+        arvore.remover(20);
+        arvore.remover(8);
         System.out.println("Em-Ordem");
         arvore.EmOrdem(arvore.raiz);
         // System.out.println("Pré-Ordem");
@@ -239,6 +221,5 @@ public class Arvore<Tipo extends Comparable> {
         // arvore.remover(22);
         // System.out.println("Em-Ordem");
         // arvore.EmOrdem(arvore.raiz);
-        arvore.busca(10);
     }
 }
