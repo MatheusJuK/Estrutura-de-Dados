@@ -1,5 +1,5 @@
 package Lista;
-class NodeListas<Tipo> {
+public class NodeListas<Tipo> {
     Tipo valor;
     NodeListas<Tipo> prox;
     NodeListas<Tipo> ant;
