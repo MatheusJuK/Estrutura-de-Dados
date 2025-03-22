@@ -61,7 +61,7 @@ public class ListaDinamica<Tipo> {
         }
     }
 
-    public void verificarParidade(NodeListas<Tipo> atual,NodeListas<Tipo> tail){
+    public void verificarParidade(NodeListas<Tipo> atual){
         if ((Integer)atual.valor % 2 == 0 && atual == this.head) {
             NodeListas<Tipo> atual2 = this.head;
             while (atual2.prox != null) {
@@ -82,17 +82,24 @@ public class ListaDinamica<Tipo> {
             }
         }
         else{
-            verificarParidade(atual.prox, tail);
+            verificarParidade(atual.prox);
         }
     }
     public void ordenarLista(){
-        NodeListas<Tipo> tail = this.head;
-        while(tail.prox != null) {
-            tail = tail.prox;
+        NodeListas<Tipo> atual3 = this.head;
+        int contPares = 0;
+        while(atual3.prox != null) {
+            if (atual3.prox.prox == null && (Integer) atual3.prox.valor % 2  == 0) {
+                contPares++;
+            }
+            else if ((Integer) atual3.valor % 2 == 0) {
+                contPares++;
+            }
+            atual3 = atual3.prox;
         }
-        for(int i = 0; i < this.tamanho + 1; i++){
+        for(int i = 0; i < contPares + 1; i++){
             NodeListas<Tipo> atual = this.head;
-            verificarParidade(atual, tail);
+            verificarParidade(atual);
         }
     }
     public static void main(String[] args) {

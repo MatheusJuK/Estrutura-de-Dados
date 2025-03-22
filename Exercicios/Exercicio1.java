@@ -13,6 +13,8 @@ public class Exercicio1 {
         lista.add(3, 7);
         lista.add(2, 8);
         lista.add(0, 9);
+        lista.add(0, 10);
+        lista.add(0, 11);
         lista.ordenarLista();
         lista.imprimir();
     }

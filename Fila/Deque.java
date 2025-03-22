@@ -10,7 +10,7 @@ public class Deque<Tipo> {
         this.tamanho = 0;
     }
 
-    boolean enqueueLeft(Tipo valor) {
+    public boolean enqueueLeft(Tipo valor) {
         NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
@@ -23,7 +23,7 @@ public class Deque<Tipo> {
         tamanho++;
         return true;
     }
-    boolean enqueueRight(Tipo valor) {
+    public boolean enqueueRight(Tipo valor) {
         NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
@@ -37,7 +37,7 @@ public class Deque<Tipo> {
         return true;
     }
 
-    void imprimir() {
+    public void imprimir() {
         NodeFilas<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
@@ -51,7 +51,7 @@ public class Deque<Tipo> {
         System.out.println();
     }
 
-    NodeFilas<Tipo> dequeueLeft() {
+    public NodeFilas<Tipo> dequeueLeft() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
@@ -69,7 +69,7 @@ public class Deque<Tipo> {
         tamanho--;
         return elemento;
     }
-    NodeFilas<Tipo> dequeueRight() {
+    public NodeFilas<Tipo> dequeueRight() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na deque");
         }
@@ -86,6 +86,17 @@ public class Deque<Tipo> {
         }
         tamanho--;
         return elemento;
+    }
+    public void rotacionar(int k){
+        for (int i = 0; i < k; i++) {
+            NodeFilas<Tipo> elemento = this.tail;
+            this.tail = elemento.ant;
+            elemento.prox = this.head;
+            this.head.ant = elemento;
+            elemento.ant = null;
+            tail.prox = null;
+            this.head = elemento;
+        }
     }
 
     public static void main(String[] args) {

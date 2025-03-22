@@ -1,7 +1,8 @@
 package Lista;
 public class ListaDuplamenteLigadaCircular<Tipo> {
-    NodeListas<Tipo> head,tail;
-    int tamanho;
+    public NodeListas<Tipo> head;
+    public NodeListas<Tipo> tail;
+    public int tamanho;
 
     public ListaDuplamenteLigadaCircular(){
         this.head = null;
@@ -9,7 +10,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         this.tamanho = 0;
     }
 
-    boolean add(Tipo valor, int pos){
+    public boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
@@ -93,6 +94,33 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         }
         tamanho--;
         return removido;
+    }
+    public void deslocar(NodeListas<Tipo> inicio,NodeListas<Tipo> fim){
+        NodeListas<Tipo> atual = this.head;
+        while (atual.prox != inicio) {
+            atual = atual.prox;
+        }
+        while (inicio != fim) {
+            NodeListas<Tipo> elemento = atual.prox;
+            atual.prox = elemento.prox;
+            elemento.prox = this.head;
+            this.tail.prox = elemento;
+            elemento.ant = this.tail;
+            atual.prox.ant = atual;
+            this.tail = elemento;
+            this.head.ant = elemento;
+            inicio = atual.prox;
+        }
+        if (inicio == fim) {
+            NodeListas<Tipo> elemento = atual.prox;
+            atual.prox = elemento.prox;
+            elemento.prox = this.head;
+            this.tail.prox = elemento;
+            elemento.ant = this.tail;
+            atual.prox.ant = atual;
+            this.tail = elemento;
+            this.head.ant = elemento;
+        }
     }
     public static void main(String[] args) {
         ListaDuplamenteLigadaCircular<Integer> lista = new ListaDuplamenteLigadaCircular<>();

@@ -1,8 +1,8 @@
 package Fila;
 
 public class FilaPrioridade<Tipo> {
-    NodeFilas<Tipo> head, tail;
-    int tamanho;
+    public NodeFilas<Tipo> head, tail;
+    public int tamanho;
 
     public FilaPrioridade() {
         this.head = null;
@@ -10,7 +10,7 @@ public class FilaPrioridade<Tipo> {
         this.tamanho = 0;
     }
 
-    boolean enqueue(Tipo valor) {
+    public boolean enqueue(Tipo valor) {
         NodeFilas<Tipo> novo = new NodeFilas<>(valor);
         if (tamanho == 0) {
             this.head = novo;
@@ -22,7 +22,7 @@ public class FilaPrioridade<Tipo> {
         tamanho++;
         return true;
     }
-    boolean enqueuePrioridade(Tipo valor,int prioridade) {
+    public boolean enqueuePrioridade(Tipo valor,int prioridade) {
         NodeFilas<Tipo> novo = new NodeFilas<>(valor,prioridade); 
         if (tamanho == 0) {
             this.head = novo;
@@ -47,7 +47,7 @@ public class FilaPrioridade<Tipo> {
         return true;
     }
 
-    void imprimir() {
+    public void imprimir() {
         NodeFilas<Tipo> atual = this.head;
         for (int i = this.tamanho; i > 0; i--) {
             if (i == 1) {
@@ -60,8 +60,22 @@ public class FilaPrioridade<Tipo> {
         }
         System.out.println();
     }
+    public void imprimirMaiores(int N) {
+        FilaPrioridade<Tipo> filaMaiores = new FilaPrioridade<>();
+        NodeFilas<Tipo> atual = this.head;
+        for (int i = this.tamanho; i > 0; i--) {
+            filaMaiores.enqueuePrioridade(atual.valor, i);
+            atual = atual.prox;
+        }
+        NodeFilas<Tipo> atual2 = filaMaiores.head;
+        for (int i = 0; i < N; i++) {
+            System.out.print(atual2.valor + " -> ");
+            atual2 = atual2.prox;
+        }
+        System.out.println();
+    }
 
-    NodeFilas<Tipo> dequeue() {
+    public NodeFilas<Tipo> dequeue() {
         if (tamanho == 0) {
             System.out.println("Não há elementos na fila");
             return null;
