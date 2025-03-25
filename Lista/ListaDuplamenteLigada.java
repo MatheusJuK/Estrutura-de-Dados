@@ -15,30 +15,27 @@ public class ListaDuplamenteLigada<Tipo> {
         }
         NodeListas<Tipo> novo = new NodeListas<>(valor);
 
-        if (pos == 0) {
-            novo.prox = this.head;
-            if (this.head != null) {
-                this.head.ant = novo;
-            }
-            this.head = novo;
-            if (this.tail == null) {
+        if(pos == 0) {
+            if (this.head == null) {
+                this.head = novo;
                 this.tail = novo;
+            }else{
+                novo.prox = this.head;
+                this.head.ant = novo;
+                this.head = novo;
             }
-            this.tail = novo;
         }else if (pos == tamanho) { 
             novo.ant = this.tail;
             this.tail.prox = novo;
             this.tail = novo;
-        } else{
+        }else{
             NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
             novo.prox = atual.prox;
             novo.ant = atual;
-            if (atual.prox != null) {
-                atual.prox.ant = novo;
-            }
+            atual.prox.ant = novo;
             atual.prox = novo;
         }
         tamanho++;
@@ -70,30 +67,31 @@ public class ListaDuplamenteLigada<Tipo> {
         NodeListas<Tipo> removido;
         if (pos == 0) {
             removido = this.head;
-            this.head = removido.prox;
-            if (this.head != null) {
-                this.head.ant = null;
-            }else{
+            if (tamanho == 1) {
+                this.head = null;
                 this.tail = null;
+            }else{
+                this.head = removido.prox;
+                removido.prox = null;
+                this.head.ant = null;
             }
-        }else {
+        }else if (pos == tamanho - 1) {
+            removido = this.tail;
+            this.tail = removido.ant;
+            this.tail.prox = null;
+            removido.ant = null;
+        }
+        else {
             NodeListas<Tipo> atual = this.head;
             for (int i = 0; i < pos - 1; i++) {
                 atual = atual.prox;
             }
             removido = atual.prox;
             atual.prox = removido.prox;
-            if (removido.prox == null) {
-                this.tail = removido.ant;
-            }
-            if (removido.prox != null) {
-                removido.prox.ant = atual;
-            }else{
-                this.tail = atual;
-            }
+            removido.prox.ant = removido.ant;
+            removido.ant = null;
+            removido.prox = null;
         }
-        removido.prox = null;
-        removido.ant = null;
         tamanho--;
         return removido;
     }

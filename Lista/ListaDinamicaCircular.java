@@ -2,7 +2,7 @@ package Lista;
 public class ListaDinamicaCircular<Tipo> {
     NodeListas<Tipo> head;
     int tamanho;
-
+    int i = 0;
     public ListaDinamicaCircular(){
         this.head = null;
         this.tamanho = 0;
@@ -16,7 +16,7 @@ public class ListaDinamicaCircular<Tipo> {
         if (pos == 0) {
             if (tamanho == 0) {
                 this.head = novo;
-                novo.prox = head;
+                novo.prox = this.head;
             }
             else{
                 NodeListas<Tipo> atual = this.head;
@@ -29,10 +29,14 @@ public class ListaDinamicaCircular<Tipo> {
             }
         }
         else{
-            NodeListas<Tipo> atual = head;
-            for (int i = 0; i < pos - 1; i++) {
+            NodeListas<Tipo> atual = this.head;
+            while (i < pos - 1) {
                 atual = atual.prox;
+                i++;
             }
+            // for (int i = 0; i < pos - 1; i++){
+            //     atual = atual.prox;
+            // }
             novo.prox = atual.prox;
             atual.prox = novo;
         }
@@ -58,6 +62,7 @@ public class ListaDinamicaCircular<Tipo> {
         NodeListas<Tipo> removido;
         if (tamanho == 1) {
             removido = this.head;
+            removido.prox = null;
             this.head = null;
         }else if(pos == 0){
             NodeListas<Tipo> atual = this.head;
