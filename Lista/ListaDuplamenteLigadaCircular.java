@@ -122,6 +122,28 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
             this.head.ant = elemento;
         }
     }
+    public boolean OrdenarNoCentral(){
+        if (this.tamanho == 0) {
+            return false;
+        }
+        if (tamanho == 1 || tamanho == 2) {
+            return true;
+        }
+        NodeListas<Tipo> atual = this.head;
+        for (int i = 0; i < this.tamanho / 2; i++) {
+            atual = atual.prox;
+        }
+        NodeListas<Tipo> elemento = atual;
+        atual = atual.ant;
+        atual.prox = elemento.prox;
+        elemento.prox.ant = atual;
+        elemento.prox = this.head;
+        elemento.ant = this.tail;
+        this.head.ant = elemento;
+        this.head = elemento;
+        this.tail.prox = this.head; 
+        return true;
+    }
     public static void main(String[] args) {
         ListaDuplamenteLigadaCircular<Integer> lista = new ListaDuplamenteLigadaCircular<>();
         lista.add(0,0);

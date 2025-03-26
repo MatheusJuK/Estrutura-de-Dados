@@ -1,7 +1,7 @@
 package Lista;
 public class ListaDinamica<Tipo> {
     NodeListas<Tipo> head;
-    int tamanho;
+    public int tamanho;
 
     public ListaDinamica(){
         this.head = null;
@@ -101,6 +101,66 @@ public class ListaDinamica<Tipo> {
             NodeListas<Tipo> atual = this.head;
             verificarParidade(atual);
         }
+    }
+    public boolean ordenarMenoresQueX(int x){
+        if (this.head == null) {
+            return false;
+        }
+        NodeListas<Tipo> atual = this.head;
+        while (atual.prox != null) {
+            NodeListas<Tipo> elemento;
+            if ((Integer)atual.prox.valor < x){
+                elemento = atual.prox;
+                if (atual == this.head && atual.prox.prox != null) {
+                    this.head = atual.prox;
+                    atual.prox = elemento.prox;
+                    elemento.prox = atual;
+                }else if (atual == this.head) {
+                    elemento.prox = this.head;
+                    this.head = atual.prox;
+                    atual.prox = null;
+                }
+                else if (atual.prox.prox == null) {
+                    atual.prox.prox = this.head;
+                    this.head = atual.prox;
+                    atual.prox = null;
+                }else{
+                    atual.prox = elemento.prox;
+                    elemento.prox = this.head;
+                    this.head = elemento;
+                }
+            }else{
+                atual = atual.prox;
+            }
+            
+        }
+        return true;
+    }
+    public boolean justarListasOrdenadas(ListaDinamica<Integer> lista1, ListaDinamica<Integer> lista2, ListaDinamica<Integer> lista){
+        if (lista1.head == null && lista2.head == null || lista1.head == null || lista2.head == null) {
+            return false;
+        }
+        lista.add(0, 0);//inserir dado facilitador
+        NodeListas<Integer> atual = lista.head;
+        NodeListas<Integer> atual1 = lista1.head;
+        NodeListas<Integer> atual2 = lista2.head;
+        while (atual1 != null && atual2 != null) {
+            if (atual1.valor < atual2.valor) {
+                atual.prox = atual1;
+                atual1 = atual1.prox;
+            }else{
+                atual.prox = atual2;
+                atual2 = atual2.prox;
+            }
+            atual = atual.prox;
+        }
+        if (atual1 != null) {
+            atual.prox = atual1;
+        }else if(atual2 != null){
+            atual.prox = atual2;
+        }
+        lista.remover(0);//remover o dado facilitador
+        return true;
     }
     public static void main(String[] args) {
         ListaDinamica<Integer> lista = new ListaDinamica<>();

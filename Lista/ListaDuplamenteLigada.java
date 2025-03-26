@@ -9,7 +9,7 @@ public class ListaDuplamenteLigada<Tipo> {
         this.tamanho = 0;
     }
 
-    boolean add(Tipo valor, int pos){
+    public boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > tamanho) {
             return false;
         }
@@ -94,6 +94,36 @@ public class ListaDuplamenteLigada<Tipo> {
         }
         tamanho--;
         return removido;
+    }
+    public boolean inverterSegmento(int indicei, int indicej){
+        if (this.head == null || indicei > tamanho || indicej > tamanho || indicej < indicei) {
+            return false;
+        }
+        NodeListas<Tipo> atuali = this.head;
+        NodeListas<Tipo> atualj = this.head;
+        for (int i = 0; i < indicei; i++) {
+            atuali = atuali.prox;
+        }
+        for (int j = 0; j < indicej; j++) {
+            atualj = atualj.prox;
+        }
+        NodeListas<Tipo> alterado = atuali;
+        while (atuali != atualj) {
+            alterado = atuali;
+            atuali = atuali.prox;
+            alterado.prox.ant = alterado.ant;
+            alterado.ant.prox = alterado.prox;
+            if (atualj.prox != null) {
+                alterado.prox = atualj.prox;
+                alterado.prox.ant = alterado;
+            }else{
+                alterado.prox = null;
+                this.tail = alterado;
+            }
+            alterado.ant = atualj;
+            atualj.prox = alterado;
+        }
+        return true;
     }
     public static void main(String[] args) {
         ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<>();
