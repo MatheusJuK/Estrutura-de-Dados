@@ -10,7 +10,7 @@ public class ListaEstatica<Tipo> {
         this.ultimo = -1;
     }
     
-    boolean add(Tipo valor, int pos){
+    public boolean add(Tipo valor, int pos){
         if (pos < 0 || pos > ultimo + 1 || pos > tamanho - 1) {
             return false;
         }
@@ -21,7 +21,7 @@ public class ListaEstatica<Tipo> {
         ultimo++;
         return true;
     }
-    boolean remove(int pos){
+    public boolean remove(int pos){
         if (pos < 0 || pos > ultimo) {
             return false;
         }
@@ -32,11 +32,15 @@ public class ListaEstatica<Tipo> {
         return true;
     }
 
-    void imprimir(){
+    public void imprimir(){
         for (int i = 0; i <= ultimo; i++) {
             System.out.print(valores[i] + " ");
         }
         System.out.println();
+    }
+    public void addCircular(Tipo valor){
+        remove(0);
+        add(valor, 0);
     }
     public static void main(String[] args) {
         ListaEstatica<String> lista = new ListaEstatica<String>(10);

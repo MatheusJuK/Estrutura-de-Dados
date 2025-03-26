@@ -1,7 +1,7 @@
 package Lista;
 public class ListaDuplamenteLigada<Tipo> {
     NodeListas<Tipo> head,tail;
-    int tamanho;
+    public int tamanho;
 
     public ListaDuplamenteLigada(){
         this.head = null;
@@ -125,14 +125,94 @@ public class ListaDuplamenteLigada<Tipo> {
         }
         return true;
     }
+
+    public boolean juntarListasOrdenadas(ListaDuplamenteLigada<Integer> lista1,ListaDuplamenteLigada<Integer> lista2,ListaDuplamenteLigada<Integer> lista){
+        if (lista1.head == null && lista2.head == null) {
+            return false;
+        }
+        if (lista1.head == null) {
+            lista.head = lista2.head;
+            lista.tail = lista2.tail;
+            lista.tamanho = lista2.tamanho;
+            return true;
+        }
+        if (lista2.head == null) {
+            lista.head = lista1.head;
+            lista.tail = lista1.tail;
+            lista.tamanho = lista1.tamanho;
+            return true;
+        }
+        NodeListas<Integer> atual1 = lista1.head;
+        NodeListas<Integer> atual2 = lista2.head;
+
+        if (atual1.valor < atual2.valor) {
+            lista.head = atual1;
+            lista.tail = atual1;
+            atual1 = atual1.prox;
+            lista.tamanho++;
+        } else {
+            lista.head = atual2;
+            lista.tail = atual2;
+            atual2 = atual2.prox;
+            lista.tamanho++;
+        }
+        NodeListas<Integer> atual = lista.head;
+        while (atual1 != null && atual2 != null) {
+            if (atual1.valor < atual2.valor){
+                atual.prox = atual1;
+                atual1.ant = atual;
+                lista.tail = atual1;
+                atual1 = atual1.prox;
+            }else{
+                atual.prox = atual2;
+                atual2.ant = atual;
+                lista.tail = atual2;
+                atual2 = atual2.prox;
+            }
+            atual = atual.prox;
+            lista.tamanho++;
+        }
+        int cont = 0;
+        if (atual1 != null) {
+            atual.prox = atual1;
+            atual1.ant = atual;
+            while (atual1 != null) {
+                cont++;
+                if (atual1.prox != null) {
+                    atual1 = atual1.prox;
+                }else{
+                    break;
+                }
+            }
+            lista.tail = atual1; 
+        }
+        else if(atual2 != null){
+            atual.prox = atual2;
+            atual2.ant = atual;
+            while (atual2 != null) {
+                cont++;
+                if (atual2.prox != null) {
+                    atual2 = atual2.prox;
+                }else{
+                    break;
+                }
+            }
+            lista.tail = atual2; 
+        }
+        lista.tamanho += cont;
+
+        return true;
+    }
     public static void main(String[] args) {
         ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<>();
-        lista.add(0,0);
-        lista.add(1,1);
-        lista.add(2,2);
-        lista.add(3,3);
-        lista.add(4,4);
-        lista.add(5,5);
+        ListaDuplamenteLigada<Integer> lista1 = new ListaDuplamenteLigada<>();
+        ListaDuplamenteLigada<Integer> lista2 = new ListaDuplamenteLigada<>();
+        lista1.add(0,0);
+        lista2.add(1,0);
+        lista1.add(2,1);
+        lista2.add(3,1);
+        lista1.add(4,2);
+        lista2.add(5,2);
         lista.imprimir();
         System.out.println(lista.remover(5).valor + " foi removido da lista");
         System.out.println(lista.remover(4).valor + " foi removido da lista");
