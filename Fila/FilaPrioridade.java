@@ -103,17 +103,31 @@ public class FilaPrioridade<Tipo> {
         }
         return elemento;
     }
-
+    public NodeFilas<Tipo> removeMin(){
+        if (tamanho == 0){
+            return null;
+        }else{
+            NodeFilas<Tipo> removido;
+            NodeFilas<Tipo> atual = this.head;
+            while (atual.prox.prioridade == atual.prox.prox.prioridade) {
+                atual = atual.prox;
+            }
+            removido = atual.prox;
+            atual.prox = removido.prox;
+            removido.prox = null;
+            tamanho--;
+            return removido;
+        }
+    }
     public static void main(String[] args) {
         FilaPrioridade<Integer> fila = new FilaPrioridade<>();
-        fila.enqueuePrioridade(0, 10);
-        fila.enqueuePrioridade(1, 11);
+        fila.enqueuePrioridade(0, 0);
+        fila.enqueuePrioridade(1, 0);
         fila.enqueuePrioridade(1, 1);
         fila.enqueuePrioridade(2, 11);
         fila.enqueuePrioridade(5, 15);
-        fila.enqueue(1);
         fila.imprimir();
-        fila.dequeue();
+        fila.removeMin();
         fila.imprimir();
     }
 }

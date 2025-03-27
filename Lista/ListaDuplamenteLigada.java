@@ -203,22 +203,44 @@ public class ListaDuplamenteLigada<Tipo> {
 
         return true;
     }
+    public void inverter(){
+        NodeListas<Tipo> ultimoOrdenado = this.head;
+        for(int i = 0; i < this.tamanho - 1;i++){
+            if (i == 0) {
+                NodeListas<Tipo> novoTail = this.head;
+                this.tail.prox = novoTail;
+                novoTail.ant = this.tail;
+                this.head = this.head.prox;
+                novoTail.prox = null;
+                this.head.ant = null;
+                this.tail = ultimoOrdenado;
+                ultimoOrdenado = novoTail;
+            }else{
+                NodeListas<Tipo> elemento = this.head;
+                NodeListas<Tipo> atual = this.head;
+                while (atual.prox != ultimoOrdenado) {
+                    atual = atual.prox;
+                }
+                this.head = this.head.prox;
+                elemento.prox = ultimoOrdenado;
+                elemento.ant = atual;
+                ultimoOrdenado.ant = elemento;
+                atual.prox = elemento;
+                this.head.ant = null;
+                ultimoOrdenado = elemento;
+            }
+        }
+    }
     public static void main(String[] args) {
         ListaDuplamenteLigada<Integer> lista = new ListaDuplamenteLigada<>();
-        ListaDuplamenteLigada<Integer> lista1 = new ListaDuplamenteLigada<>();
-        ListaDuplamenteLigada<Integer> lista2 = new ListaDuplamenteLigada<>();
-        lista1.add(0,0);
-        lista2.add(1,0);
-        lista1.add(2,1);
-        lista2.add(3,1);
-        lista1.add(4,2);
-        lista2.add(5,2);
+        lista.add(0,0);
+        lista.add(1,1);
+        lista.add(2,2);
+        lista.add(3,3);
+        lista.add(4,4);
+        lista.add(5,5);
         lista.imprimir();
-        System.out.println(lista.remover(5).valor + " foi removido da lista");
-        System.out.println(lista.remover(4).valor + " foi removido da lista");
-        System.out.println(lista.remover(3).valor + " foi removido da lista");
-        // System.out.println(lista.remover(2).valor + " foi removido da lista");
-        // System.out.println(lista.remover(1).valor + " foi removido da lista");
+        lista.inverter();
         lista.imprimir();
     }
 }
