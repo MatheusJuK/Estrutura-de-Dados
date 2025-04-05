@@ -1,6 +1,6 @@
 package Lista;
 public class ListaDinamica<Tipo> {
-    NodeListas<Tipo> head;
+    public NodeListas<Tipo> head;
     public int tamanho;
 
     public ListaDinamica(){
