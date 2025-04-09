@@ -1,17 +1,17 @@
 package Pilhas;
 
 public class Pilha<Tipo>{
-    int tamanho;
-    NodePilha<Tipo> topo;
+    public int tamanho;
+    public NodePilha<Tipo> topo;
 
     public Pilha(){
         this.tamanho = 0;
         this.topo = null;
     }
-    boolean isEmpty(){
+    public boolean isEmpty(){
         return (this.tamanho == 0);
     }
-    boolean push(Tipo valor){
+    public boolean push(Tipo valor){
         NodePilha<Tipo> novo = new NodePilha<>(valor);
         if (this.isEmpty()) {
             this.topo = novo;
@@ -22,7 +22,7 @@ public class Pilha<Tipo>{
         tamanho++;
         return true;
     }
-    NodePilha<Tipo> pop(){
+    public Tipo pop(){
         if (this.isEmpty()) {
             return null;
         }else{
@@ -30,10 +30,10 @@ public class Pilha<Tipo>{
             this.topo = this.topo.prox;
             removido.prox = null;
             tamanho--;
-            return removido;
+            return removido.valor;
         }
     }
-    NodePilha<Tipo> peek(){
+    public NodePilha<Tipo> peek(){
         System.out.println(this.topo.valor + " está no topo");
         return this.topo;
     }
@@ -42,9 +42,21 @@ public class Pilha<Tipo>{
         while (atual.prox != null) {
             if (atual == this.topo) {
                 System.out.println(atual.valor + " <- topo");
+            }else{
+                System.out.println(atual.valor);
             }
-            System.out.println(atual.valor);
             atual = atual.prox;
+        }
+    }
+    public Tipo get(int i){
+        if (i < 0 || i >= this.tamanho) {
+            return null;
+        }else{
+            NodePilha<Tipo> atual = this.topo;
+            for (int j = 0; j < i; j++) {
+                atual = atual.prox;
+            }
+            return atual.valor;
         }
     }
     public static void main(String[] args) {

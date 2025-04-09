@@ -8,14 +8,17 @@ public class Main {
         grafo.addVertice("C");
         grafo.addVertice("D");
         grafo.addVertice("E");
+        grafo.addVertice("F");
+        grafo.addVertice("G");
         
         grafo.addAresta(2,"A","B");
-        grafo.addAresta(1,"A","C");
-        grafo.addAresta(3,"B","D");
-        grafo.addAresta(1,"D","C");
-        grafo.addAresta(3,"E","A");
-        grafo.addAresta(2,"E","B");
+        grafo.addAresta(2,"A","G");
+        grafo.addAresta(1,"B","C");
+        grafo.addAresta(3,"C","D");
+        grafo.addAresta(1,"D","E");
+        grafo.addAresta(3,"E","F");
 
         grafo.BFS();
+        grafo.DFS();
     }
 }

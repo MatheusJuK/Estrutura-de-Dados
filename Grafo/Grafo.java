@@ -1,14 +1,13 @@
 package Grafo;
-
-import java.util.ArrayList;
+import Pilhas.Pilha;
 
 public class Grafo<Tipo> {
-    public ArrayList<Vertice<Tipo>> vertices;
-    public ArrayList<Aresta<Tipo>> arestas;
+    public Lista<Vertice<Tipo>> vertices;
+    public Lista<Aresta<Tipo>> arestas;
 
     public Grafo() {
-        this.vertices = new ArrayList<>();
-        this.arestas = new ArrayList<>();
+        this.vertices = new Lista<>();
+        this.arestas = new Lista<>();
     }
 
     public void addVertice(Tipo valor){
@@ -27,7 +26,7 @@ public class Grafo<Tipo> {
 
     public Vertice<Tipo> getVertice(Tipo valor){
         Vertice<Tipo> vertice = null;
-        for (int i = 0; i < this.vertices.size(); i++) {
+        for (int i = 0; i < this.vertices.tamanho; i++) {
             if (this.vertices.get(i).valor.equals(valor)) {
                 vertice = this.vertices.get(i);
                 break;
@@ -37,16 +36,17 @@ public class Grafo<Tipo> {
     }
 
     public void BFS(){
-        ArrayList<Vertice<Tipo>> marcados = new ArrayList<>();
-        ArrayList<Vertice<Tipo>> fila = new ArrayList<>();
+        System.out.println("BFS: ");
+        Lista<Vertice<Tipo>> marcados = new Lista<>();
+        Lista<Vertice<Tipo>> fila = new Lista<>();
 
-        Vertice<Tipo> atual = this.vertices.get(4);
+        Vertice<Tipo> atual = this.vertices.get(0);
         marcados.add(atual);
         System.out.println(atual.valor);
         fila.add(atual);
-        while (!fila.isEmpty()) {
+        while (fila.tamanho != 0) {
             Vertice<Tipo> visitado = fila.get(0);
-            for (int i = 0; i < visitado.arestasSaida.size(); i++) {
+            for (int i = 0; i < visitado.arestasSaida.tamanho; i++) {
                 Vertice<Tipo> vizinho = visitado.arestasSaida.get(i).fim;
                 if (!marcados.contains(vizinho)) {
                     marcados.add(vizinho);
@@ -55,6 +55,32 @@ public class Grafo<Tipo> {
                 }
             }
             fila.remove(0);
+        }
+    }
+    public void DFS(){
+        Lista<Vertice<Tipo>> marcados = new Lista<>();
+        Pilha<Vertice<Tipo>> pilha = new Pilha<>();
+        for (int i = 0; i < this.vertices.tamanho; i++) {
+            Vertice<Tipo> atual = this.vertices.get(i);
+            if (atual.arestasEntrada.tamanho == 0 && i != 0) {
+                break;
+            }
+            if (!marcados.contains(atual)) {
+                marcados.add(atual);
+                pilha.push(atual);
+            }
+            for (int j = 0; j < atual.arestasSaida.tamanho; j++) {
+                Vertice<Tipo> vizinho = atual.arestasSaida.get(j).fim;
+                if (!marcados.contains(vizinho)) {
+                    marcados.add(vizinho);
+                    pilha.push(vizinho);
+                }
+            }
+        }   
+        System.out.println("DFS: ");
+        int tamanho = pilha.tamanho;
+        for (int i = 0; i < tamanho; i++) {
+            System.out.println(pilha.get(i).valor);
         }
     }
 }
