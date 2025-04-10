@@ -1,6 +1,6 @@
 package Arvores;
 
-public class NodeArvore<Tipo> {
+public class NodeArvore<Tipo extends Comparable>{
     Tipo valor;
     NodeArvore<Tipo> direita;
     NodeArvore<Tipo> esquerda;

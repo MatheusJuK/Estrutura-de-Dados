@@ -1,10 +1,10 @@
 package Arvores;
 
 @SuppressWarnings("rawtypes")
-public class Arvore<Tipo extends Comparable> {
+public class ArvoreDeBuscaBinaria<Tipo extends Comparable> {
     NodeArvore<Tipo> raiz;
 
-    public Arvore() {
+    public ArvoreDeBuscaBinaria() {
         this.raiz = null;
     }
 
@@ -187,7 +187,7 @@ public class Arvore<Tipo extends Comparable> {
         }
     }
     public static void main(String[] args) {
-        Arvore<Integer> arvore = new Arvore<>();
+        ArvoreDeBuscaBinaria<Integer> arvore = new ArvoreDeBuscaBinaria<>();
         arvore.add(10);
         arvore.add(6);
         arvore.add(8);
