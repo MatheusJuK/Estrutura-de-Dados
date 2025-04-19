@@ -100,7 +100,7 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
         while (atual.prox != inicio) {
             atual = atual.prox;
         }
-        while (inicio != fim) {
+        while (true) {
             NodeListas<Tipo> elemento = atual.prox;
             atual.prox = elemento.prox;
             elemento.prox = this.head;
@@ -109,18 +109,22 @@ public class ListaDuplamenteLigadaCircular<Tipo> {
             atual.prox.ant = atual;
             this.tail = elemento;
             this.head.ant = elemento;
-            inicio = atual.prox;
+            if (inicio != fim) {
+                inicio = atual.prox;
+            }else{
+                break;
+            }
         }
-        if (inicio == fim) {
-            NodeListas<Tipo> elemento = atual.prox;
-            atual.prox = elemento.prox;
-            elemento.prox = this.head;
-            this.tail.prox = elemento;
-            elemento.ant = this.tail;
-            atual.prox.ant = atual;
-            this.tail = elemento;
-            this.head.ant = elemento;
-        }
+        // if (inicio == fim) {
+        //     NodeListas<Tipo> elemento = atual.prox;
+        //     atual.prox = elemento.prox;
+        //     elemento.prox = this.head;
+        //     this.tail.prox = elemento;
+        //     elemento.ant = this.tail;
+        //     atual.prox.ant = atual;
+        //     this.tail = elemento;
+        //     this.head.ant = elemento;
+        // }
     }
     public boolean OrdenarNoCentral(){
         if (this.tamanho == 0) {

@@ -1,5 +1,6 @@
 package Arvores;
 
+@SuppressWarnings("rawtypes")
 public class NodeArvore<Tipo extends Comparable>{
     Tipo valor;
     NodeArvore<Tipo> direita;

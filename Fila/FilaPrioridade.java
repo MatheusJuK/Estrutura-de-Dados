@@ -10,18 +10,6 @@ public class FilaPrioridade<Tipo> {
         this.tamanho = 0;
     }
 
-    public boolean enqueue(Tipo valor) {
-        NodeFilas<Tipo> novo = new NodeFilas<>(valor);
-        if (tamanho == 0) {
-            this.head = novo;
-            this.tail = novo;
-        } else {
-            novo.prox = this.head;
-            this.head = novo;
-        }
-        tamanho++;
-        return true;
-    }
     public boolean enqueuePrioridade(Tipo valor,int prioridade) {
         NodeFilas<Tipo> novo = new NodeFilas<>(valor,prioridade); 
         if (tamanho == 0) {
@@ -34,12 +22,16 @@ public class FilaPrioridade<Tipo> {
             }
             if (atual == this.head && novo.prioridade <= atual.prioridade) {
                 novo.prox = this.head;
+                this.head.ant = novo;
                 this.head = novo;
             }else if(atual == this.tail){
                 atual.prox = novo;
+                novo.ant = atual;
                 this.tail = novo;
             }else{
                 novo.prox = atual.prox;
+                novo.ant = atual;
+                atual.prox.ant = novo;
                 atual.prox = novo;
             }
         }
